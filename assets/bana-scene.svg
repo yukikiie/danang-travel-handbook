@@ -1,0 +1,30 @@
+<svg class="summary-scene bana-scene" viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <path class="scene-sky" d="M24 70Q47 28 87 42Q128 16 169 42Q218 39 220 88Q241 119 217 153Q213 195 166 193Q123 215 86 190Q35 204 26 161Q3 119 24 70Z" fill="#d8edef"/>
+  <g stroke="#3e3a39" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+    <g class="scene-motion bana-sun">
+      <circle cx="68" cy="77" r="22" fill="#f6d27a"/>
+      <path d="M68 46V40M68 108V114M37 77H31M99 77H105M46 55L42 51M90 99L94 103M46 99L42 103M90 55L94 51" fill="none"/>
+    </g>
+    <path d="M20 151L67 105L99 133L135 87L181 133L207 111L223 155V187H20Z" fill="#cce3b8"/>
+    <path d="M21 169L69 136L104 161L156 117L218 164V187H21Z" fill="#b9daa5"/>
+    <path d="M106 92Q98 92 99 85Q100 79 107 80Q108 70 117 71Q125 71 127 79Q140 77 141 86Q141 92 134 92Z" fill="#fffaf0"/>
+    <path d="M28 61Q121 65 214 38" fill="none"/>
+    <g class="scene-motion bana-cable-car">
+      <path d="M176 49V70M166 70H186" fill="none"/>
+      <rect x="158" y="70" width="36" height="35" rx="8" fill="#f2a497"/>
+      <path d="M163 77H189V90H163Z" fill="#fffaf0"/>
+      <path d="M176 78V89M170 98H182" fill="none"/>
+    </g>
+    <!-- A curved gold walkway rests in two simple stone hands. -->
+    <path d="M34 143Q120 122 210 144L207 153Q120 133 37 153Z" fill="#f6d27a"/>
+    <path d="M36 141V129Q120 108 210 130V143M58 126V137M83 121V132M109 119V130M135 120V131M160 122V133M185 126V137" fill="none"/>
+    <g fill="#fffaf0">
+      <path d="M67 193L69 173Q60 164 60 154V142Q60 137 64 138L68 151V134Q68 128 73 130L76 149L78 132Q79 127 83 131L84 151L88 140Q90 136 94 140L92 157L100 151Q105 150 104 155L96 170L89 176L88 193Z"/>
+      <path d="M152 193L153 174Q144 164 144 154V143Q145 138 149 141L153 152V135Q154 130 158 132L161 150L164 135Q166 130 170 134V153L176 143Q179 139 182 143L178 160L185 155Q191 153 189 159L180 172L174 178L175 193Z"/>
+    </g>
+    <path d="M71 164Q78 159 86 164M155 166Q164 161 172 167" fill="none" stroke="#cce3b8"/>
+    <path d="M27 191Q120 177 217 191" fill="#cce3b8"/>
+    <path class="scene-sparkle" d="M203 79V91M197 85H209M37 109V117M33 113H41" stroke="#fffaf0" fill="none"/>
+    <circle class="scene-star" cx="119" cy="47" r="3" fill="#fffaf0" stroke="none"/>
+  </g>
+</svg>
