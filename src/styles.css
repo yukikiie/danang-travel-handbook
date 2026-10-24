@@ -121,3 +121,74 @@ body{isolation:isolate;background:#fbf7eb}.paper-backdrop{position:fixed;inset:0
 
 .cover-motion-bar{display:flex;justify-content:flex-end;padding:5px 12px 0;font-size:12px;color:var(--muted)}.cover-motion-bar label{display:flex;align-items:center;gap:6px;min-height:32px;cursor:pointer}.cover-motion-bar input{accent-color:#327d78;width:16px;height:16px}.motion-paused .paper-cloud,.motion-paused .paper-waves,.motion-paused .paper-backdrop *{animation-play-state:paused!important}@keyframes paper-cloud-drift{from{translate:-18px 0}to{translate:25px 3px}}@keyframes paper-hero-tide{from{translate:-16px 3px;rotate:-1deg}to{translate:16px -3px;rotate:1deg}}
 #checklist .entry-reminder-details{padding:0 0 12px 35px;font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}#checklist .entry-reminder-details p{margin:0 0 7px}#checklist .entry-reminder-links{display:flex;flex-wrap:wrap;gap:0 16px}#checklist .entry-reminder-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);text-underline-offset:4px}#checklist .entry-reminder-links .external-link-icon{width:14px;height:14px;margin-left:5px;flex-shrink:0}
+
+/* Larger type and spacious controls, keeping the original rounded planner. */
+:root{--ink:#182c2b;--muted:#374c4a;--card:#fffdf9;font-size:20px;font-synthesis:none}
+body{font-size:20px;line-height:1.8;color:var(--ink)}
+.wrap{width:min(560px,calc(100% - 36px))}
+button{min-height:48px}a{ text-decoration-color:#397e97 }
+.nav-inner{width:min(760px,calc(100% - 32px));gap:16px;min-height:80px}
+.brand{flex:0 0 auto;font-size:20px;gap:10px;align-items:center;font-weight:700;white-space:nowrap}
+.brand svg{width:48px;height:48px;flex-shrink:0}
+.brand .header-sun,.brand:hover .header-sun{transform-origin:center;animation:readable-sun-turn 20s linear infinite}
+.nav-links{gap:4px;flex:1 1 auto}.nav-links a{font-size:18px;font-weight:700;padding:8px 10px;min-height:50px}
+.hero{padding-top:24px}.hero h1{font-size:36px;font-weight:700;line-height:1.6;margin-top:15px;letter-spacing:0}
+.eyebrow{font-size:18px;line-height:1.8;letter-spacing:0;margin-bottom:10px;color:var(--muted)}
+.date-label{font-size:22px;font-weight:700;line-height:1.8;letter-spacing:0}
+.countdown{padding:10px 22px;gap:5px 10px;margin-top:22px}.countdown strong{font-size:46px;font-weight:700}.countdown span{font-size:20px}
+.cover-motion-bar{padding:9px 8px 0;font-size:18px;color:var(--ink)}.cover-motion-bar label{min-height:44px;gap:10px}.cover-motion-bar input{width:26px;height:26px;flex-shrink:0}
+.hero-art .header-motion-overlay{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none}
+.paper-hero .paper-cloud{animation-duration:8s}.paper-hero .paper-cloud.two{animation-duration:11s}
+.paper-hero .paper-waves{animation-duration:6s}
+@keyframes paper-cloud-drift{from{translate:-32px 0}to{translate:34px 5px}}
+@keyframes paper-hero-tide{from{translate:-21px 4px;rotate:-1deg}to{translate:21px -4px;rotate:1deg}}
+.section{padding-top:48px}.section-head{margin-bottom:22px}.section-head h2{font-size:32px;font-weight:700;gap:14px}
+.section-icon{width:64px;height:64px}.section-icon svg{width:44px;height:44px;animation:readable-icon-float 4s ease-in-out infinite;transform-origin:center}
+.flights{gap:22px}.flight-head{font-size:18px;line-height:1.7;padding:12px 18px;flex-wrap:wrap;gap:4px 18px}
+.flight-route{grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:20px 20px 12px;gap:14px}
+.flight-route>div:first-child{grid-column:1;grid-row:1}.flight-route>div:last-child{grid-column:2;grid-row:1}
+.flight-time{font-size:40px;font-weight:700;line-height:1.3;letter-spacing:-.4px;margin-bottom:8px}
+.airport{font-size:20px;line-height:1.7;overflow-wrap:anywhere}.flight-path{grid-column:1 / -1;grid-row:2;width:96px;justify-self:center;margin:0}
+.flight-path span{line-height:26px}.flight-path .doodle-icon{width:30px;height:30px}.flight-path:before{top:14px}.flight-duration{font-size:18px;line-height:1.7;color:var(--muted)}
+.flight-note{font-size:20px;line-height:1.9;padding:0 20px 20px}.transport-note,.itinerary-guidance{font-size:20px;line-height:1.9;color:var(--muted);margin-top:16px}
+.hotel-head{font-size:18px;line-height:1.8;padding:11px 20px}.hotel-body{padding:21px 22px}.hotel-body h3{font-size:26px;font-weight:700;line-height:1.6}
+.hotel-address,.hotel-phone,.hotel-route{font-size:20px;line-height:1.9;overflow-wrap:anywhere}.hotel-body .button{font-size:20px;min-height:48px;line-height:1.8}
+.days{min-height:144px;padding-top:16px;padding-bottom:24px}.day-tab{min-width:72px;padding:66px 2px 8px}.day-tab strong{font-size:20px;font-weight:700;letter-spacing:0;padding:4px 5px}.day-tab small{font-size:18px;line-height:1.7;color:var(--muted)}
+.date-marker,.marker-ball{width:46px;height:46px}.date-marker{top:31px}
+.day-summary.illustrated-summary{grid-template-columns:128px minmax(0,1fr);gap:18px;padding:18px;min-height:160px}
+.summary-scene-button{width:128px;height:120px}.day-summary small{font-size:18px;color:var(--muted)}.day-summary h3{font-size:26px;font-weight:700;line-height:1.65}.day-summary p{font-size:20px;line-height:1.9;color:var(--muted)}
+.stop{padding-bottom:26px;gap:16px}.stop time{font-size:20px;font-weight:700;padding-top:14px;line-height:1.6;white-space:nowrap}
+.stop-card{padding:18px;border-radius:21px}.stop-card h4,.stop.transport .stop-card h4{font-size:24px;font-weight:700;line-height:1.65;margin-top:9px}
+.stop-card p,.stop-card .stop-duration{font-size:20px;line-height:1.9;color:var(--muted)}.stop-card a{font-size:20px;line-height:1.8;min-height:48px;display:inline-flex;align-items:center;margin-top:8px}
+.tag-label{font-size:18px;line-height:1.6;padding:3px 10px}.flight-tag{width:50px;height:34px}.flight-tag .doodle-icon{width:30px;height:30px}
+.paper-card{padding:24px}.paper-card h3{font-size:24px;font-weight:700;line-height:1.7}.check-progress{font-size:18px;line-height:1.8}
+.check-label{font-size:20px;line-height:1.9;gap:14px;padding:13px 0;min-height:52px}.check-label input{width:30px;height:30px;margin-top:4px}
+.check-bottom{align-items:start;flex-direction:column;gap:12px;padding-top:18px}.check-bottom small{font-size:18px;line-height:1.9}.text-button{font-size:18px;min-height:48px;color:var(--ink)}
+#checklist .entry-reminder-details{font-size:18px;line-height:1.9;color:var(--muted);padding-left:44px}#checklist .entry-reminder-links a{min-height:48px;font-size:18px}
+.reminder-card p{font-size:20px;line-height:1.9;color:var(--muted)}.reminder-card a{font-size:20px;line-height:1.9;display:inline-block;min-height:48px}
+.button,.button.small{font-size:18px;line-height:1.65;min-height:48px;padding:10px 16px}.button-icon,.footer .button-icon{width:26px;height:26px}.external-link-icon{width:18px;height:18px}
+.footer{font-size:18px;line-height:1.9;gap:14px;padding-block:34px}.footer .button{font-size:18px;min-height:48px;color:var(--ink)}
+.dialog-head h2{font-size:28px;font-weight:700;line-height:1.6}.dialog-head p,.field small,.appearance-intro,.style-scope,.style-preview-label,.style-save-note{font-size:18px;line-height:1.9;color:var(--muted)}
+.field label,.field-label{font-size:20px;line-height:1.7}.field input,.field textarea,.field select,.day-edit-tools select{font-size:20px;line-height:1.8;min-height:52px}.editor-body summary{font-size:22px;min-height:48px}
+.editor-tabs button{font-size:18px;min-height:50px}.style-bold-label{font-size:20px!important;min-height:48px}.style-bold-label input{width:28px!important;height:28px;min-height:28px!important}
+.style-reset-actions button,.day-edit-tools .button,.dialog-actions .button{font-size:18px;min-height:48px}.style-swatch{width:44px;height:44px;min-height:44px}.close-button{width:48px;min-width:48px;height:48px;font-size:28px}
+.editor-error,.toast,.storage-warning,.filter-empty,.filter-empty .text-button{font-size:18px;line-height:1.8}.venue-card p,.venue-card small,.venue-card .button,.pill{font-size:18px;line-height:1.8}
+@keyframes readable-icon-float{0%,100%{transform:translateY(2px) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes readable-sun-turn{to{transform:rotate(360deg)}}
+@media(max-width:600px){
+ .nav-inner{flex-wrap:wrap;justify-content:center;gap:3px;padding:7px 0 9px}.brand{justify-content:center;font-size:20px}.brand svg{width:42px;height:42px}
+ nav.nav-links{flex:0 0 100%;width:100%;max-width:100%!important;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;overflow:visible;padding:0}.nav-links a{padding:7px 3px;min-width:0;min-height:48px}
+}
+@media(max-width:480px){
+ .wrap{width:calc(100% - 28px)}.nav-inner{width:calc(100% - 24px)}.section-head h2{gap:10px}.section-icon{width:58px;height:58px}.section-icon svg{width:40px;height:40px}
+ .hero h1{font-size:36px}.flight-route{padding-inline:16px;gap:10px}.flight-head,.flight-note{padding-inline:16px}.hotel-body{padding:20px}.paper-card{padding:20px}
+ .day-summary.illustrated-summary{grid-template-columns:112px minmax(0,1fr);gap:12px;padding:14px}.summary-scene-button{width:112px;height:108px}
+ .stop{display:block;padding-left:28px}.stop time{display:block;text-align:left;padding:0;margin:0 0 9px}.stop:before{left:8px!important;top:20px;bottom:0}.stop-body{margin-left:0}.stop-body:before,.stop.transport .stop-body:before{left:-26px;top:-34px;width:15px;height:15px}.stop.transport time{padding-top:0}.stop.transport .stop-card{padding-top:0}
+ .editor-row,.style-controls{grid-template-columns:1fr}.day-edit-tools{flex-wrap:wrap;gap:10px}.day-edit-tools select{flex:0 0 100%;width:100%}.day-edit-tools .button{flex:1;padding-inline:9px}.dialog-head,.editor-body{padding:20px}.dialog-actions{padding:16px;gap:10px;flex-wrap:wrap}.dialog-actions .button{flex:1 1 120px}
+}
+@media(max-width:360px){
+ .day-summary.illustrated-summary{grid-template-columns:1fr;justify-items:center;text-align:center;gap:5px}.summary-scene-button{width:132px;height:120px}.date-label{font-size:22px}.day-tab strong{padding-inline:3px}
+ #checklist .entry-reminder-details{padding-left:0}
+}
+@media(prefers-reduced-motion:reduce){.section-icon svg,.brand .header-sun{animation:none!important}}
+@media print{.wrap{width:100%;max-width:680px}.cover-motion-bar{display:none}}

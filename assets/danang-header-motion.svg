@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1448 1086" class="header-motion-overlay" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="header-paper-shadow" x="-25%" y="-30%" width="160%" height="180%"><feDropShadow dx="3" dy="7" stdDeviation="4" flood-color="#155e65" flood-opacity=".28"/></filter>
+    <filter id="header-paper-fibre" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".56" numOctaves="2" seed="8" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 .72 0 0 0 0 .66 0 0 0 0 .5 0 0 0 .17 0" result="fibre"/><feBlend in="SourceGraphic" in2="fibre" mode="soft-light" result="paper"/><feComposite in="paper" in2="SourceGraphic" operator="in"/></filter>
+    <clipPath id="header-boat-weave"><path d="M595 847Q714 817 834 846L817 894Q716 963 613 895Z"/></clipPath>
+  </defs>
+  <style>
+    .header-motion-overlay{pointer-events:none;overflow:visible}
+    .header-motion-overlay .hero-boat-travel{animation:header-boat-travel 7s ease-in-out -2s infinite alternate}
+    .header-motion-overlay .hero-boat-bob{transform-box:fill-box;transform-origin:50% 72%;animation:header-boat-bob 3.8s ease-in-out -1.4s infinite}
+    .header-motion-overlay .hero-ripple{transform-box:fill-box;transform-origin:center;animation:header-ripple 3.4s ease-in-out -1s infinite}
+    .header-motion-overlay .hero-ripple.two{animation-delay:-2.3s;animation-duration:4.2s}
+    .header-motion-overlay .hero-ripple.three{animation-delay:-.5s;animation-duration:4.8s}
+    .header-motion-overlay .hero-birds{animation:header-bird-drift 6s ease-in-out -2s infinite alternate}
+    .header-motion-overlay .hero-bird-wing{transform-box:fill-box;transform-origin:center;animation:header-bird-wing 2.4s ease-in-out -.6s infinite alternate}
+    .header-motion-overlay .hero-bird-wing.second{animation-delay:-1.7s}
+    @keyframes header-boat-travel{from{transform:translateX(-25px)}to{transform:translateX(25px)}}
+    @keyframes header-boat-bob{0%,100%{transform:translateY(8px) rotate(-4deg)}50%{transform:translateY(-10px) rotate(4deg)}}
+    @keyframes header-ripple{0%,100%{opacity:.35;transform:translateX(-8px) scaleX(.91)}50%{opacity:.85;transform:translateX(10px) scaleX(1.14)}}
+    @keyframes header-bird-drift{from{transform:translate(-15px,9px)}to{transform:translate(20px,-12px)}}
+    @keyframes header-bird-wing{from{transform:scaleY(.7) rotate(-3deg)}to{transform:scaleY(1.12) rotate(3deg)}}
+    body.motion-paused .header-motion-overlay *,body.motion-paused .header-motion-overlay{animation-play-state:paused!important}
+    @media(prefers-reduced-motion:reduce){.header-motion-overlay *{animation:none!important}}
+    @media print{.header-motion-overlay{display:none!important}}
+  </style>
+  <!-- Separate paper strips breathe on the river without moving the picture. -->
+  <g class="hero-ripple" fill="none" stroke-linecap="round">
+    <path d="M431 769Q470 758 508 766M465 783Q514 775 554 782" stroke="#b8e6d9" stroke-width="7"/>
+    <path d="M446 790Q477 784 503 789" stroke="#188b93" stroke-width="5"/>
+  </g>
+  <g class="hero-ripple two" fill="none" stroke-linecap="round">
+    <path d="M894 774Q944 764 989 773M938 790Q985 781 1022 788" stroke="#b9e8db" stroke-width="7"/>
+    <path d="M882 792Q910 787 932 790" stroke="#218e95" stroke-width="5"/>
+  </g>
+  <g class="hero-ripple three" fill="none" stroke-linecap="round">
+    <path d="M737 949Q802 932 861 946M812 966Q867 953 912 963" stroke="#bce9d9" stroke-width="8"/>
+    <path d="M765 963Q798 956 826 960" stroke="#26929a" stroke-width="5"/>
+  </g>
+  <!-- A second basket boat lives on the open water, left of the original boat. -->
+  <g class="hero-boat-travel">
+    <ellipse cx="716" cy="921" rx="118" ry="14" fill="#146c76" opacity=".24"/>
+    <g class="hero-boat-bob" filter="url(#header-paper-shadow)">
+      <g filter="url(#header-paper-fibre)">
+        <path d="M595 847Q714 817 834 846L817 894Q716 963 613 895Z" fill="#ae783d"/>
+        <path d="M595 847Q623 880 717 891Q793 887 834 846L817 894Q716 963 613 895Z" fill="#ba8647"/>
+        <path d="M595 847Q606 895 664 916Q690 929 718 929Q644 926 613 895Z" fill="#d4a15d"/>
+        <g clip-path="url(#header-boat-weave)" fill="none" stroke="#845831" stroke-width="2.4" opacity=".7">
+          <path d="M590 864L654 934M614 850L688 940M644 841L720 942M674 835L752 939M704 835L786 928M734 835L813 907M765 835L832 881M792 834L842 859"/>
+          <path d="M591 894L638 840M612 917L670 835M643 933L703 832M678 941L738 831M713 941L771 837M749 934L804 844M785 920L837 856M811 910L848 874"/>
+        </g>
+        <ellipse cx="714" cy="845" rx="120" ry="30" fill="#edbd76"/>
+        <ellipse cx="714" cy="844" rx="108" ry="21" fill="#79562f"/>
+        <path d="M607 844Q714 817 821 844Q786 863 714 863Q644 861 607 844Z" fill="#946738"/>
+        <path d="M622 833L626 853M648 829L650 857M676 825L677 860M706 824V861M736 825L734 860M764 828L761 857M793 833L789 852" fill="none" stroke="#d6a561" stroke-width="3"/>
+        <ellipse cx="714" cy="849" rx="48" ry="9" fill="#b78042"/>
+        <path d="M600 841Q714 811 829 840" fill="none" stroke="#f5ce90" stroke-width="5" stroke-linecap="round"/>
+        <path d="M649 860L726 845L745 850L665 869Z" fill="#dbaa69"/>
+        <path d="M753 864L812 786" fill="none" stroke="#815a34" stroke-width="11" stroke-linecap="round"/>
+        <path d="M754 860L811 783" fill="none" stroke="#e4b06a" stroke-width="7" stroke-linecap="round"/>
+        <path d="M752 855L771 861L735 918Q730 925 723 921L716 917Q712 913 717 906Z" fill="#efb866"/>
+        <path d="M724 912L759 863" stroke="#f7ce8a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M644 833Q651 827 661 834L673 847L653 850Z" fill="#df8360"/>
+      </g>
+    </g>
+  </g>
+  <!-- Small folded paper silhouettes make the empty sky feel alive. -->
+  <g class="hero-birds" filter="url(#header-paper-shadow)" fill="#fcf5df">
+    <g transform="translate(597 263)"><path class="hero-bird-wing" d="M-40 8Q-21-19 0-2Q21-25 44-8Q17-5 0 11Q-17-4-40 8Z"/><path d="M-2 3L1 11L8 5" fill="#dfd8bc"/></g>
+    <g transform="translate(783 163) scale(.8)"><path class="hero-bird-wing second" d="M-39 6Q-19-20 0-1Q21-24 42-9Q15-4 0 10Q-15-6-39 6Z"/><path d="M-1 3L1 10L9 4" fill="#dfd8bc"/></g>
+    <g transform="translate(907 285) scale(.65)"><path class="hero-bird-wing" d="M-40 8Q-21-19 0-2Q21-25 44-8Q17-5 0 11Q-17-4-40 8Z"/></g>
+  </g>
+</svg>

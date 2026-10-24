@@ -231,32 +231,32 @@
     function renderDayEditor(){const select=$('edit-day');select.replaceChildren();draft.days.forEach((d,i)=>{const o=text('option',(i+1)+'日目 · '+fmt(dateAt($('edit-start').value||draft.start,i),{day:'numeric',month:'short'}));o.value=i;select.append(o)});select.value=editingDay;const day=draft.days[editingDay];$('edit-day-title').value=day.title;$('edit-day-note').value=day.note;$('edit-stops').value=day.stops.map(s=>[s.time,s.type,s.title,s.note,s.url].join(' | ').replace(/( \| )+$/,'')).join('\n');$('remove-day').disabled=draft.days.length<=1;$('add-day').disabled=draft.days.length>=21}
     function renderFlightEditor(){$('flight-editor').replaceChildren();draft.flights.forEach((f,i)=>{const heading=text('p',i?'復路のフライト':'往路のフライト','field-label');$('flight-editor').append(heading);const fields=[['label','カードの見出し'],['code','便名'],['from','出発空港'],['to','到着空港'],['depart','出発時刻'],['arrive','到着時刻'],['note','フライトのメモ']];fields.forEach(([prop,label])=>{const field=text('div','','field'),l=text('label',label),input=document.createElement('input');l.htmlFor='flight-'+i+'-'+prop;input.id=l.htmlFor;input.value=f[prop];input.maxLength=prop==='note'?180:80;input.oninput=()=>{draft.flights[i][prop]=input.value};field.append(l,input);$('flight-editor').append(field)})})}
     const appearanceGroups=[
-      {id:'hero',label:'メインタイトル',selector:'.hero h1',sample:'ダナン 3泊4日',size:34},
-      {id:'eyebrow',label:'旅の短い見出し',selector:'.eyebrow',sample:'ベトナム · ゆったり旅・休憩多め',size:11},
-      {id:'tripDate',label:'旅行日程',selector:'.date-label,.date-label span',sample:'11/06（金）– 11/09（月）',size:18},
-      {id:'navigation',label:'上部メニュー',selector:'.nav-links a',sample:'フライト　宿泊　予定　持ち物',size:14},
-      {id:'sections',label:'セクション見出し',selector:'.section-head h2',sample:'毎日の予定',size:28},
-      {id:'hotel',label:'宿泊先名',selector:'.hotel-body h3',sample:'予約済みの宿泊先',size:20},
-      {id:'checkTitle',label:'チェックリストの見出し',selector:'#prepare .paper-card>h3',sample:'出発前のチェックリスト',size:18},
-      {id:'dayTitle',label:'各日の見出し',selector:'.day-summary h3',sample:'ダナンで、のんびり',size:18},
-      {id:'dates',label:'日付タブ',selector:'.day-tab strong',sample:'11/06　11/07　11/08　11/09',size:18},
-      {id:'stopTitle',label:'予定の見出し',selector:'.stop-card h4',sample:'ミーケービーチを散歩',size:17},
-      {id:'notes',label:'本文とメモ',selector:'.stop-card p,.hotel-address,.hotel-route,.flight-note,.transport-note,.airport',sample:'天気と交通に合わせて調整できます。',size:14},
-      {id:'flightTime',label:'フライトの発着時刻',selector:'.flight-time',sample:'14:55　15:50',size:35},
-      {id:'timelineTime',label:'予定の時刻',selector:'.stop time',sample:'18:00',size:13},
-      {id:'countdownNumber',label:'カウントダウンの数字',selector:'.countdown strong',sample:'21',size:32},
+      {id:'hero',label:'メインタイトル',selector:'.hero h1',sample:'ダナン 3泊4日',size:36},
+      {id:'eyebrow',label:'旅の短い見出し',selector:'.eyebrow',sample:'ベトナム · ゆったり旅・休憩多め',size:18},
+      {id:'tripDate',label:'旅行日程',selector:'.date-label,.date-label span',sample:'11/06（金）– 11/09（月）',size:22},
+      {id:'navigation',label:'上部メニュー',selector:'.nav-links a',sample:'フライト　宿泊　予定　持ち物',size:18},
+      {id:'sections',label:'セクション見出し',selector:'.section-head h2',sample:'毎日の予定',size:32},
+      {id:'hotel',label:'宿泊先名',selector:'.hotel-body h3',sample:'予約済みの宿泊先',size:26},
+      {id:'checkTitle',label:'チェックリストの見出し',selector:'#prepare .paper-card>h3',sample:'出発前のチェックリスト',size:24},
+      {id:'dayTitle',label:'各日の見出し',selector:'.day-summary h3',sample:'ダナンで、のんびり',size:26},
+      {id:'dates',label:'日付タブ',selector:'.day-tab strong',sample:'11/06　11/07　11/08　11/09',size:20},
+      {id:'stopTitle',label:'予定の見出し',selector:'.stop-card h4',sample:'ミーケービーチを散歩',size:24},
+      {id:'notes',label:'本文とメモ',selector:'.stop-card p,.hotel-address,.hotel-route,.flight-note,.transport-note,.airport',sample:'天気と交通に合わせて調整できます。',size:20},
+      {id:'flightTime',label:'フライトの発着時刻',selector:'.flight-time',sample:'14:55　15:50',size:40},
+      {id:'timelineTime',label:'予定の時刻',selector:'.stop time',sample:'18:00',size:20},
+      {id:'countdownNumber',label:'カウントダウンの数字',selector:'.countdown strong',sample:'21',size:46},
       {id:'countdownText',label:'カウントダウンの説明',selector:'.countdown span',sample:'出発まで　日',size:20},
-      {id:'checkItems',label:'持ち物の項目',selector:'#checklist .check-label span',sample:'パスポート・有効な旅行書類',size:15},
-      {id:'labels',label:'小さな文字とラベル',selector:'.flight-head,.flight-head span,.hotel-head,.hotel-head span,.tag-label,.day-summary small,.day-tab small,.check-progress,.check-bottom small,.flight-duration,.footer>span',sample:'2日目　フライトと宿泊情報',size:13},
-      {id:'links',label:'リンクと電話番号',selector:'.stop-card a,.hotel-body a',sample:'宿泊先の地図を見る',size:14}
+      {id:'checkItems',label:'持ち物の項目',selector:'#checklist .check-label span',sample:'パスポート・有効な旅行書類',size:20},
+      {id:'labels',label:'小さな文字とラベル',selector:'.flight-head,.flight-head span,.hotel-head,.hotel-head span,.tag-label,.day-summary small,.day-tab small,.check-progress,.check-bottom small,.flight-duration,.footer>span',sample:'2日目　フライトと宿泊情報',size:18},
+      {id:'links',label:'リンクと電話番号',selector:'.stop-card a,.hotel-body a',sample:'宿泊先の地図を見る',size:20}
     ];
-    const appearanceKey='danang-travel-book-appearance-ja-v2:'+location.pathname;
+    const appearanceKey='danang-travel-book-appearance-readable-v3:'+location.pathname;
     function normalizeAppearance(value){
       const result={};if(!value||typeof value!=='object'||Array.isArray(value))return result;
       for(const group of appearanceGroups){
         const entry=value[group.id];if(!entry||typeof entry!=='object'||Array.isArray(entry))continue;
         const clean={};
-        if(typeof entry.size==='number'&&Number.isFinite(entry.size))clean.size=Math.min(64,Math.max(8,Math.round(entry.size)));
+        if(typeof entry.size==='number'&&Number.isFinite(entry.size))clean.size=Math.min(64,Math.max(18,Math.round(entry.size)));
         if(typeof entry.color==='string'&&/^#[0-9a-f]{6}$/i.test(entry.color))clean.color=entry.color.toUpperCase();
         if(typeof entry.bold==='boolean')clean.bold=entry.bold;
         if(Object.keys(clean).length)result[group.id]=clean;
@@ -275,7 +275,7 @@
         rules.push(group.selector+'{'+declarations.join(';')+'}');
       }
       if(preferences.navigation?.size)rules.push('.nav-links{min-width:0;max-width:calc(100% - 46px);overflow-x:auto;padding-block:3px}.nav-links a{flex-shrink:0}');
-      if(preferences.dates?.size)rules.push('.day-tab{min-width:'+Math.max(72,Math.ceil(preferences.dates.size*3.4+18))+'px}');
+      if(preferences.dates?.size)rules.push('.day-tab{min-width:'+Math.max(72,Math.ceil(preferences.dates.size*2.8+12))+'px}');
       if(preferences.notes?.size)rules.push('.flight-route>div{min-width:0}');
       if(preferences.flightTime?.size>36)rules.push('.flight-route{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.flight-route>div:first-child{grid-column:1;grid-row:1}.flight-route>div:last-child{grid-column:2;grid-row:1}.flight-path{grid-column:1 / -1;grid-row:2;width:80px;justify-self:center}');
       if(preferences.flightTime?.size>44)rules.push('.flight-route{grid-template-columns:minmax(0,1fr)}.flight-route>div:first-child{grid-column:1;grid-row:1}.flight-route>div:last-child{grid-column:1;grid-row:3}.flight-path{grid-column:1;grid-row:2}');
@@ -325,7 +325,7 @@
         const button=text('button','','style-swatch');button.type='button';button.dataset.color=color;button.style.setProperty('--swatch',color);button.setAttribute('aria-label',label+' '+color);button.title=label+' '+color;button.onclick=()=>editAppearance('color',color);$('style-palette').append(button);
       }
       $('style-target').onchange=refreshAppearanceControls;
-      for(const id of ['style-size','style-size-range'])$(id).oninput=()=>{const size=Number($(id).value);if($(id).value!==''&&Number.isFinite(size)&&size>=8&&size<=64)editAppearance('size',size)};
+      for(const id of ['style-size','style-size-range'])$(id).oninput=()=>{const size=Number($(id).value);if($(id).value!==''&&Number.isFinite(size)&&size>=18&&size<=64)editAppearance('size',size)};
       $('style-color').oninput=()=>editAppearance('color',$('style-color').value);
       $('style-color-hex').oninput=()=>{if(/^#[0-9a-f]{6}$/i.test($('style-color-hex').value))editAppearance('color',$('style-color-hex').value)};
       $('style-bold').onchange=()=>editAppearance('bold',$('style-bold').checked);
