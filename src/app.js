@@ -244,9 +244,9 @@
       draft.stays.forEach((stay,index)=>{
         const card=text('fieldset','','stay-edit-card');card.append(text('legend','宿泊先 '+(index+1)));
         for(const [prop,label]of stayFields){
-          const field=text('div','','field'),l=text('label',label),input=document.createElement(prop==='note'?'textarea':'input');
+          const field=text('div','','field'),l=text('label',label),input=document.createElement(['note','address'].includes(prop)?'textarea':'input');
           input.id='stay-'+index+'-'+prop;input.dataset.stayField=prop;l.htmlFor=input.id;input.value=stay[prop];
-          if(prop==='note'){input.rows=5;input.maxLength=3000}else{input.type=prop==='phone'?'tel':prop==='url'?'url':'text';input.maxLength=prop==='url'?2000:500}
+          if(['note','address'].includes(prop)){input.rows=prop==='note'?5:3;input.maxLength=3000}else{input.type=prop==='phone'?'tel':prop==='url'?'url':'text';input.maxLength=prop==='url'?2000:500}
           field.append(l,input);card.append(field);
         }
         const remove=text('button','この宿泊先を削除','button small quiet');remove.type='button';
