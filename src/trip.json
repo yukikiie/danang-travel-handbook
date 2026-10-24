@@ -5,6 +5,7 @@
   "start": "2026-11-06",
   "note": "11月6〜9日 · 香港 ⇄ ダナン · 3泊4日",
   "sample": false,
+  "dataRevisions": ["sala-2026-10-24-v1"],
   "flights": [
     {
       "label": "往路 · 香港航空",
@@ -48,9 +49,9 @@
         {
           "time": "17:00",
           "type": "plan",
-          "title": "荷物を置いて、ひと休み",
-          "note": "宿泊先へ移動し、水分をとってゆっくり休憩。到着日は予定を詰め込まず、荷ほどきも少しずつ。",
-          "url": ""
+          "title": "Sala Danang Beach Hotelにチェックイン",
+          "note": "サラ ダナン ビーチ ホテルへ。チェックインは14:00以降で、17:00は到着の目安です。入国と移動の状況に合わせて調整し、荷物を置いたら水分をとってゆっくり休憩。",
+          "url": "https://www.google.com/maps/search/?api=1&query=Sala%20Danang%20Beach%20Hotel%2C%2036-38%20Lam%20Hoanh%20Street%2C%20Da%20Nang%2C%20Vietnam"
         },
         {
           "time": "18:30",
@@ -202,8 +203,8 @@
         {
           "time": "12:00",
           "type": "plan",
-          "title": "チェックアウト・昼食",
-          "note": "実際のチェックアウト時刻に合わせて調整。近くで昼食をとり、荷物の預け先を確認します。",
+          "title": "12:00までに、ホテルをチェックアウト",
+          "note": "Sala Danang Beach Hotelの通常のチェックアウトは12:00まで。14:00までの延長はリクエストのみで未確約のため、12:00を基準にします。荷物預かりはフロントで確認し、近くで昼食を。",
           "url": ""
         },
         {
@@ -248,5 +249,14 @@
     "充電器・モバイルバッテリー・変換プラグ・通信手段",
     "ベトナムドン・支払い方法・空港とホイアンの往復送迎を確認"
   ],
-  "stays": []
+  "stays": [
+    {
+      "role": "11月6〜9日 · 3泊",
+      "name": "Sala Danang Beach Hotel",
+      "address": "36-38 Lam Hoanh Street, Phuoc My, Son Tra, Da Nang, Vietnam",
+      "phone": "+84 236 3658 555",
+      "note": "サラ ダナン ビーチ ホテル。チェックイン：11/6 14:00以降／チェックアウト：11/9 12:00まで（現地時間）。14:00までのレイトチェックアウトはリクエストのみ・未確約です。",
+      "url": "https://www.google.com/maps/search/?api=1&query=Sala%20Danang%20Beach%20Hotel%2C%2036-38%20Lam%20Hoanh%20Street%2C%20Da%20Nang%2C%20Vietnam"
+    }
+  ]
 }

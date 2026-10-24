@@ -11,6 +11,19 @@
     try{const saved=JSON.parse(storageRead(key)),legacy=JSON.parse(storageRead(legacyKey));if(validTrip(saved))trip=saved;else if(validTrip(legacy)){trip=legacy;storageWrite(key,trip)}}catch{}
     // Update only the untouched former city day, preserving personal edits.
     if(trip.days[1]?.title==='ダナンで、のんびり'&&hash(JSON.stringify(trip.days[1]))==='1oetfet'){trip.days[1]=copy(base.days[1]);storageWrite(key,trip)}
+    // Apply the confirmed hotel once, leaving customized or deleted stops untouched.
+    const hotelRevision='sala-2026-10-24-v1',revisions=Array.isArray(trip.dataRevisions)?trip.dataRevisions:[];
+    if(!revisions.includes(hotelRevision)){
+      if(trip.start===base.start&&trip.days.length===4){
+        const updateHotelStops=trip.stays.length===0||(trip.stays.length===1&&trip.stays[0].name===base.stays[0].name);
+        if(trip.stays.length===0)trip.stays=copy(base.stays);
+        if(updateHotelStops)[[0,'1lz8thn',2],[3,'xwmx4h',2]].forEach(([dayIndex,previousHash,newIndex])=>{
+          const stops=trip.days[dayIndex].stops,index=stops.findIndex(stop=>hash(JSON.stringify(['time','type','title','note','url'].map(prop=>stop[prop])))===previousHash);
+          if(index>=0)stops[index]=copy(base.days[dayIndex].stops[newIndex]);
+        });
+      }
+      trip.dataRevisions=[...revisions,hotelRevision];storageWrite(key,trip);
+    }
     try{const saved=JSON.parse(storageRead(key+':checks')||storageRead(legacyKey+':checks'));if(saved&&typeof saved==='object'&&!Array.isArray(saved))checks=saved}catch{}
     const fmt=(d,options)=>new Intl.DateTimeFormat('ja-JP',options).format(d);
     const text=(tag,value,cls)=>{const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;return n};
