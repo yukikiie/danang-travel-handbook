@@ -11,6 +11,7 @@ if(!html.includes('class="hero-art paper-hero"')||!html.includes('paper-cloud-dr
 if(!html.includes('id="day-tabs"')||!html.includes('class="day-layout"')||!html.includes('id="bana-scene-template"'))throw new Error('Missing restored planner layout');
 if((html.match(/data:font\/woff2;base64,/g)||[]).length!==2)throw new Error('Missing regular and bold Japanese fonts');
 if(!html.includes('hero-boat-travel')||!html.includes('header-motion-overlay'))throw new Error('Missing layered header animation');
+if(!html.includes('id="stay-editor"')||!html.includes('DaNangStayRepair.repairContinuations')||html.includes('id="edit-stays"'))throw new Error('Missing structured hotel editor or saved-data repair');
 if(/id="weather-current"|class="nearby-weather"|id="weather-nearby"/.test(html))throw new Error('Recent weather must not appear');
 if(Object.values(json('appearance-data')).some(value=>value.size<18))throw new Error('Text is too small');
 if(!html.includes('id="motion-toggle"')||!html.includes('animation-play-state:paused'))throw new Error('Missing pause controls');
@@ -20,7 +21,7 @@ if(/TWAC|台灣|足球|CX464|CX473|YWPS/.test(html.replace(/data:[^"')\s]+/g,'')
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 if(new Set(ids).size!==ids.length)throw new Error('Duplicate IDs');
 for(const day of trip.days)for(const stop of day.stops)if(!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(stop.time))throw new Error('Invalid time');
-if(/\/\* (?:FONT_FACE|SITE_STYLE|WEATHER_STYLE|COVER_IMAGE|HEADER_MOTION|BANA_ART|COVER_MOTION|APP_CODE|WEATHER_CODE|TRIP_DATA) \*\//.test(html))throw new Error('Unresolved build marker');
+if(/\/\* (?:FONT_FACE|SITE_STYLE|WEATHER_STYLE|COVER_IMAGE|HEADER_MOTION|BANA_ART|COVER_MOTION|APP_CODE|WEATHER_CODE|TRIP_DATA|STAY_REPAIR) \*\//.test(html))throw new Error('Unresolved build marker');
 if(!trip.days[1].title.includes('バーナーヒルズ')||!trip.days[2].title.includes('ホイアン'))throw new Error('Missing requested destinations');
 if(trip.checklist.filter(item=>item.includes('入国前申告')).length!==1||!html.includes('https://prearrival.immigration.gov.vn/'))throw new Error('Missing entry declaration reminder');
 console.log(JSON.stringify({scripts,days:trip.days.length,stops:trip.days.map(d=>d.stops.length),checklist:trip.checklist.length,hotels:trip.stays.length,restoredLayout:true,weather:true,bytes:Buffer.byteLength(html)}));

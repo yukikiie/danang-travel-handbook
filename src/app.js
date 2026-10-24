@@ -31,6 +31,9 @@
       if(reminder&&!trip.checklist.some(isEntryReminder))trip.checklist.splice(Math.min(1,trip.checklist.length),0,reminder);
       trip.dataRevisions=[...entryRevisions,entryRevision];storageWrite(key,trip);
     }
+    // Heal only the recognizable hotel memo fragments left by the former line editor.
+    const repairedStays=DaNangStayRepair.repairContinuations(trip.stays);
+    if(JSON.stringify(repairedStays)!==JSON.stringify(trip.stays)){trip.stays=repairedStays;storageWrite(key,trip)}
     try{const saved=JSON.parse(storageRead(key+':checks')||storageRead(legacyKey+':checks'));if(saved&&typeof saved==='object'&&!Array.isArray(saved))checks=saved}catch{}
     const fmt=(d,options)=>new Intl.DateTimeFormat('ja-JP',options).format(d);
     const text=(tag,value,cls)=>{const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;return n};
@@ -227,6 +230,30 @@
       });
       if(!trip.stays.length){const card=text('article','','hotel-card'),head=text('div','','hotel-head'),body=text('div','','hotel-body');head.append(text('span','宿泊情報'),text('span','宿泊情報'));body.append(text('h3','宿泊先を入力'),text('p','「内容を編集」から予約済みの宿泊先、住所、移動のメモを入力できます。','hotel-address'));card.append(head,body);$('stay-cards').append(card)}
     }
+    const stayFields=[['role','宿泊期間・ラベル'],['name','宿泊先名（必須）'],['address','住所'],['phone','電話番号'],['note','チェックイン・チェックアウト・メモ'],['url','地図リンク']];
+    function saveDraftStays(){
+      if(!draft)return;
+      draft.stays=[...$('stay-editor').querySelectorAll('.stay-edit-card')].map((card,index)=>{
+        const stay={...draft.stays[index]};
+        for(const [prop]of stayFields)stay[prop]=card.querySelector('[data-stay-field="'+prop+'"]').value;
+        return stay;
+      });
+    }
+    function renderStayEditor(){
+      const container=$('stay-editor');container.replaceChildren();
+      draft.stays.forEach((stay,index)=>{
+        const card=text('fieldset','','stay-edit-card');card.append(text('legend','宿泊先 '+(index+1)));
+        for(const [prop,label]of stayFields){
+          const field=text('div','','field'),l=text('label',label),input=document.createElement(prop==='note'?'textarea':'input');
+          input.id='stay-'+index+'-'+prop;input.dataset.stayField=prop;l.htmlFor=input.id;input.value=stay[prop];
+          if(prop==='note'){input.rows=5;input.maxLength=3000}else{input.type=prop==='phone'?'tel':prop==='url'?'url':'text';input.maxLength=prop==='url'?2000:500}
+          field.append(l,input);card.append(field);
+        }
+        const remove=text('button','この宿泊先を削除','button small quiet');remove.type='button';
+        remove.onclick=()=>{saveDraftStays();draft.stays.splice(index,1);renderStayEditor()};card.append(remove);container.append(card);
+      });
+    }
+    $('add-stay').onclick=()=>{saveDraftStays();draft.stays.push({role:'',name:'',address:'',phone:'',note:'',url:''});renderStayEditor();$('stay-'+(draft.stays.length-1)+'-name').focus()};
     function editorError(message){$('editor-error').textContent=message;$('editor-error').classList.remove('hidden');$('editor-error').scrollIntoView({block:'nearest'})}
     function saveDraftDay(){if(!draft)return;draft.days[editingDay].title=$('edit-day-title').value.trim();draft.days[editingDay].note=$('edit-day-note').value.trim();draft.days[editingDay].stops=$('edit-stops').value.split('\n').map(line=>line.trim()).filter(Boolean).map(line=>{const [time='',type='plan',title='',note='',...urlParts]=line.split('|').map(s=>s.trim());return {time,type,title,note,url:urlParts.join('|')}})}
     function renderDayEditor(){const select=$('edit-day');select.replaceChildren();draft.days.forEach((d,i)=>{const o=text('option',(i+1)+'日目 · '+fmt(dateAt($('edit-start').value||draft.start,i),{day:'numeric',month:'short'}));o.value=i;select.append(o)});select.value=editingDay;const day=draft.days[editingDay];$('edit-day-title').value=day.title;$('edit-day-note').value=day.note;$('edit-stops').value=day.stops.map(s=>[s.time,s.type,s.title,s.note,s.url].join(' | ').replace(/( \| )+$/,'')).join('\n');$('remove-day').disabled=draft.days.length<=1;$('add-day').disabled=draft.days.length>=21}
@@ -337,15 +364,15 @@
         button.onkeydown=event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const next=event.key==='Home'?'content':event.key==='End'?'appearance':type==='content'?'appearance':'content';showEditorTab(next);$('editor-'+next+'-tab').focus()};
       }
       $('trip-editor').addEventListener('close',()=>{draftAppearance=null;applyAppearance(appearance)});
-      $('editor-form').addEventListener('invalid',event=>{showEditorTab(event.target.closest('#editor-appearance-panel')?'appearance':'content')},true);
+      $('editor-form').addEventListener('invalid',event=>{showEditorTab(event.target.closest('#editor-appearance-panel')?'appearance':'content');event.target.closest('details')?.setAttribute('open','')},true);
       window.addEventListener('resize',scheduleSummaryMeasure);document.fonts.ready.then(scheduleSummaryMeasure);applyAppearance(appearance);
     }
-    function openEditor(initialTab='content'){draft=copy(trip);draftAppearance=copy(appearance);editingDay=activeDay;$('editor-error').classList.add('hidden');$('edit-title').value=draft.title;$('edit-subtitle').value=draft.subtitle;$('edit-start').value=draft.start;$('edit-eyebrow').value=draft.eyebrow;$('edit-note').value=draft.note;$('edit-sample').checked=!!draft.sample;$('edit-checklist').value=draft.checklist.join('\n');$('edit-stays').value=draft.stays.map(s=>[s.role,s.name,s.address,s.phone,s.note,s.url].join(' | ').replace(/( \| )+$/,'')).join('\n');renderDayEditor();renderFlightEditor();showEditorTab(initialTab==='appearance'?'appearance':'content');$('trip-editor').showModal()}
+    function openEditor(initialTab='content'){draft=copy(trip);draftAppearance=copy(appearance);editingDay=activeDay;$('editor-error').classList.add('hidden');$('edit-title').value=draft.title;$('edit-subtitle').value=draft.subtitle;$('edit-start').value=draft.start;$('edit-eyebrow').value=draft.eyebrow;$('edit-note').value=draft.note;$('edit-sample').checked=!!draft.sample;$('edit-checklist').value=draft.checklist.join('\n');renderStayEditor();renderDayEditor();renderFlightEditor();showEditorTab(initialTab==='appearance'?'appearance':'content');$('trip-editor').showModal()}
     $('edit-trip').onclick=openEditor;['close-editor','cancel-editor'].forEach(id=>$(id).onclick=()=>$('trip-editor').close());$('trip-editor').addEventListener('click',e=>{if(e.target===$('trip-editor')){const r=$('trip-editor').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('trip-editor').close()}});
     $('edit-day').onchange=()=>{saveDraftDay();editingDay=Number($('edit-day').value);renderDayEditor()};$('edit-start').onchange=()=>{if(dateOK($('edit-start').value)){saveDraftDay();renderDayEditor()}};
     $('add-day').onclick=()=>{if(draft.days.length>=21)return;saveDraftDay();draft.days.push({title:'新しい一日の予定',note:'詳しい予定はこれから。',icon:'✳',stops:[]});editingDay=draft.days.length-1;renderDayEditor()};
     $('remove-day').onclick=()=>{if(draft.days.length<=1)return;saveDraftDay();draft.days.splice(editingDay,1);editingDay=Math.min(editingDay,draft.days.length-1);renderDayEditor()};
-    $('editor-form').onsubmit=e=>{e.preventDefault();saveDraftDay();draft.title=$('edit-title').value.trim();draft.subtitle=$('edit-subtitle').value.trim();draft.start=$('edit-start').value;draft.eyebrow=$('edit-eyebrow').value.trim();draft.note=$('edit-note').value.trim();draft.sample=$('edit-sample').checked;draft.checklist=$('edit-checklist').value.split('\n').map(x=>x.trim()).filter(Boolean);draft.stays=$('edit-stays').value.split('\n').map(x=>x.trim()).filter(Boolean).map(line=>{const [role='',name='',address='',phone='',note='',...urlParts]=line.split('|').map(x=>x.trim());return {role,name,address,phone,note,url:urlParts.join('|')}});if(!validTrip(draft))return editorError('タイトル、有効な出発日、1〜21日分の予定を入力してください。');for(let i=0;i<draft.days.length;i++){if(!draft.days[i].title)return editorError((i+1)+'日目のテーマを入力してください。');for(const s of draft.days[i].stops){if(!s.title||!(s.time==='未定'||/^([01]\d|2[0-3]):[0-5]\d$/.test(s.time))||!['walk','food','train','plan','other'].includes(s.type))return editorError((i+1)+'日目を確認してください。時刻は09:00形式または「未定」、種類はwalk／food／train／plan／otherで、見出しも必要です。');if(s.url&&!safeURL(s.url))return editorError((i+1)+'日目のリンクはhttps://またはhttp://で始めてください。')}}if(draft.stays.some(s=>s.url&&!safeURL(s.url)))return editorError('宿泊先のリンクはhttps://またはhttp://で始めてください。');trip=copy(draft);appearance=normalizeAppearance(draftAppearance||appearance);const appearanceSaved=storageWrite(appearanceKey,appearance);applyAppearance(appearance);activeDay=Math.min(activeDay,trip.days.length-1);const saved=storageWrite(key,trip);render();$('trip-editor').close();toast(saved&&appearanceSaved?'この端末に保存しました。HTMLをダウンロードして共有版を更新できます。':'しおりを更新しました。HTMLをダウンロードして保存してください。');};
+    $('editor-form').onsubmit=e=>{e.preventDefault();saveDraftDay();draft.title=$('edit-title').value.trim();draft.subtitle=$('edit-subtitle').value.trim();draft.start=$('edit-start').value;draft.eyebrow=$('edit-eyebrow').value.trim();draft.note=$('edit-note').value.trim();draft.sample=$('edit-sample').checked;draft.checklist=$('edit-checklist').value.split('\n').map(x=>x.trim()).filter(Boolean);saveDraftStays();if(!validTrip(draft))return editorError('タイトル、有効な出発日、1〜21日分の予定を入力してください。');for(let i=0;i<draft.days.length;i++){if(!draft.days[i].title)return editorError((i+1)+'日目のテーマを入力してください。');for(const s of draft.days[i].stops){if(!s.title||!(s.time==='未定'||/^([01]\d|2[0-3]):[0-5]\d$/.test(s.time))||!['walk','food','train','plan','other'].includes(s.type))return editorError((i+1)+'日目を確認してください。時刻は09:00形式または「未定」、種類はwalk／food／train／plan／otherで、見出しも必要です。');if(s.url&&!safeURL(s.url))return editorError((i+1)+'日目のリンクはhttps://またはhttp://で始めてください。')}}if(draft.stays.some(s=>!s.name.trim())){$('stay-editor-details').open=true;return editorError('宿泊先名を入力してください。不要な宿泊先は削除できます。')}if(draft.stays.some(s=>s.url&&!safeURL(s.url)))return editorError('宿泊先のリンクはhttps://またはhttp://で始めてください。');trip=copy(draft);appearance=normalizeAppearance(draftAppearance||appearance);const appearanceSaved=storageWrite(appearanceKey,appearance);applyAppearance(appearance);activeDay=Math.min(activeDay,trip.days.length-1);const saved=storageWrite(key,trip);render();$('trip-editor').close();toast(saved&&appearanceSaved?'この端末に保存しました。HTMLをダウンロードして共有版を更新できます。':'しおりを更新しました。HTMLをダウンロードして保存してください。');};
     $('reset-checks').onclick=()=>{checks={};storageWrite(key+':checks',checks);renderChecks();toast('チェックをクリアしました。')};
     $('download-html').onclick=()=>{const clone=document.documentElement.cloneNode(true);const appearanceNode=clone.querySelector('#appearance-data');appearanceNode.textContent='\n'+JSON.stringify(appearance,null,2).replace(/</g,'\\u003c')+'\n';clone.querySelector('#appearance-overrides').textContent=appearanceCSS(appearance);const dataNode=clone.querySelector('#trip-data');dataNode.textContent='\n'+JSON.stringify(trip,null,2).replace(/</g,'\\u003c')+'\n';clone.querySelector('#trip-editor').removeAttribute('open');clone.querySelector('#codex-browser-sidebar-comments-root')?.remove();clone.querySelector('#toast').classList.add('hidden');clone.querySelector('#storage-warning').classList.add('hidden');const blob=new Blob(['<!doctype html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);toast('しおりを保存しました。ダウンロードしたindex.htmlでサイトを更新すると、共有版にも反映されます。');};
     window.DaNangJourney={getTrip:()=>copy(trip)};setupAppearanceEditor();render();setInterval(countdown,60000);

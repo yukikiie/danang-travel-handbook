@@ -53,7 +53,7 @@
     </div><div id="editor-content-panel" role="tabpanel" aria-labelledby="editor-content-tab"><div class="field"><label for="edit-title">しおりのタイトル</label><input id="edit-title" maxlength="80" required=""></div><div class="field"><label for="edit-subtitle">旅の紹介</label><textarea id="edit-subtitle" rows="2" maxlength="300"></textarea></div><div class="editor-row"><div class="field"><label for="edit-start">出発日</label><input id="edit-start" type="date" min="2000-01-01" max="2100-12-31" required=""></div><div class="field"><label for="edit-eyebrow">タイトルの上の短い見出し</label><input id="edit-eyebrow" maxlength="80"></div></div><div class="field"><label for="edit-note">旅のメモ</label><input id="edit-note" maxlength="120"></div><label class="check-label"><input id="edit-sample" type="checkbox"><span>「サンプルのしおり」と表示する</span></label>
     <details open=""><summary>毎日の予定</summary><div class="day-edit-tools"><select id="edit-day" aria-label="編集する日を選択"></select><button class="button small quiet" id="add-day" type="button">＋ 1日追加</button><button class="button small quiet" id="remove-day" type="button">－ 1日削除</button></div><div class="field"><label for="edit-day-title">この日のテーマ</label><input id="edit-day-title" maxlength="100" required=""></div><input type="hidden" id="edit-day-note"><div class="field"><label for="edit-stops">予定を1行に1件ずつ入力</label><textarea id="edit-stops" rows="7" spellcheck="false"></textarea><small>書式：<strong>時刻 | 種類 | 見出し | メモ | 地図リンク</strong><br>種類：walk 散歩、food 食事、train 移動、plan 観光、other その他。メモとリンクは空欄可。時刻は「未定」でも入力できます。<br>例：09:00 | food | 朝食 | ゆっくり食事を</small></div></details>
     <details><summary>フライト情報</summary><div id="flight-editor"></div><p class="note" style="font-size:18px;line-height:1.8">フライト情報は手入力です。運航状況は自動更新されません。</p></details>
-    <details><summary>チェックリストと宿泊情報</summary><div class="field"><label for="edit-checklist">持ち物を1行に1件ずつ入力</label><textarea id="edit-checklist" rows="5"></textarea></div><div class="field"><label for="edit-stays">宿泊先を1行に1件ずつ入力</label><textarea id="edit-stays" rows="4"></textarea><small>書式：<strong>宿泊期間・ラベル | 宿泊先名 | 住所 | 電話 | メモ | 地図リンク</strong>。最後の項目は空欄でもかまいません。</small></div></details>
+    <details id="stay-editor-details"><summary>チェックリストと宿泊情報</summary><div class="field"><label for="edit-checklist">持ち物を1行に1件ずつ入力</label><textarea id="edit-checklist" rows="5"></textarea></div><div id="stay-editor" class="stay-editor"></div><button id="add-stay" class="button small quiet" type="button">＋ 宿泊先を追加</button><p class="stay-editor-help">チェックイン・チェックアウトはメモ欄に改行して入力できます。</p></details>
     </div>
     <section id="editor-appearance-panel" class="hidden" role="tabpanel" aria-labelledby="editor-appearance-tab">
       <p class="appearance-intro">調整する文字を選び、サイズ・色・太字を変更できます。日本語が読みやすい丸みのある書体を使用します。</p>
@@ -282,6 +282,7 @@
 }
 </script>
   <script type="application/json" id="trip-data">/* TRIP_DATA */</script>
+  <script id="stay-repair-code">/* STAY_REPAIR */</script>
   <script id="app-code">/* APP_CODE */</script>
 
 

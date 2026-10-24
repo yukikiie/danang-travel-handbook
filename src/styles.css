@@ -193,3 +193,9 @@ button{min-height:48px}a{ text-decoration-color:#397e97 }
 }
 @media(prefers-reduced-motion:reduce){.section-icon svg,.brand .header-sun{animation:none!important}}
 @media print{.wrap{width:100%;max-width:680px}.cover-motion-bar{display:none}}
+
+.hotel-route{white-space:pre-line}
+.stay-edit-card{min-width:0;margin:20px 0;padding:18px;border:2px solid var(--ink);border-radius:18px;background:var(--card)}
+.stay-edit-card legend{padding:0 7px;font-size:22px;font-weight:700;line-height:1.6}
+.stay-edit-card .field:last-of-type{margin-bottom:12px}.stay-edit-card input[type=url]{overflow-wrap:anywhere}
+.stay-editor-help{font-size:18px;line-height:1.9;color:var(--muted)}
