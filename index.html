@@ -1372,7 +1372,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     });
     // Keep section links, scrolling, history and the selected button in sync.
     const sectionLinks=[...document.querySelectorAll('.nav-links a')];
-    const navSections=sectionLinks.map(link=>$(link.hash.slice(1))).filter(Boolean);
+    const navSections=[...document.querySelectorAll('main section[id]')].filter(section=>sectionLinks.some(link=>link.hash==='#'+section.id));
     let navScrollTarget=null,navScrollTimer=0,navUpdateFrame=0;
     function navOffset(){return Math.ceil(document.querySelector('.topbar').getBoundingClientRect().height)+16}
     function syncNavSize(){document.documentElement.style.setProperty('--nav-offset',navOffset()+'px')}
