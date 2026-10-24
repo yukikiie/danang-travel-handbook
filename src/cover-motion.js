@@ -18,6 +18,10 @@
     toggle.checked = paused;
     toggle.disabled = preference.matches;
     document.body.classList.toggle('motion-paused', paused);
+    // Stop finite JavaScript effects as well as the continuous CSS layers.
+    if (paused) document.getAnimations().forEach(animation => {
+      if (!('animationName' in animation) && !('transitionProperty' in animation)) animation.cancel();
+    });
     cover.setAttribute('aria-pressed', String(!paused));
     cover.setAttribute('aria-disabled', String(preference.matches));
     cover.setAttribute('aria-label', preference.matches

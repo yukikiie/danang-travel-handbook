@@ -62,6 +62,7 @@
     }
     let markerSlide=null,markerBounce=null,markerRoll=null;
     const reducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)');
+    const motionPaused=()=>reducedMotion.matches||document.body.classList.contains('motion-paused');
     function positionDateMarker(animate=false){
       const rail=$('day-tabs'),marker=$('date-marker'),tab=$('day-tab-'+activeDay);if(!marker||!tab)return;
       const railRect=rail.getBoundingClientRect(),tabRect=tab.getBoundingClientRect(),markerRect=marker.getBoundingClientRect();
@@ -69,7 +70,7 @@
       const from=markerRect.left-railRect.left+rail.scrollLeft;
       if(markerSlide)markerSlide.cancel();if(markerBounce)markerBounce.cancel();if(markerRoll)markerRoll.cancel();
       marker.style.transform='translateX('+target+'px)';marker.dataset.day=String(activeDay);
-      if(!animate||reducedMotion.matches)return;
+      if(!animate||motionPaused())return;
       if(Math.abs(target-from)>.5){markerSlide=marker.animate([{transform:'translateX('+from+'px)'},{transform:'translateX('+target+'px)'}],{duration:440,easing:'cubic-bezier(.22,.75,.25,1)'});}
       const ball=marker.querySelector('.marker-ball'),icon=ball.querySelector('svg');
       markerBounce=ball.animate([
@@ -120,7 +121,7 @@
     }
     const summarySceneReplays=new WeakMap();let visibleSummaryDay=null,summarySceneObserver=null,summarySceneRevealed=false;
     function playSummaryScene(button){
-      if(reducedMotion.matches||!button.isConnected)return;
+      if(motionPaused()||!button.isConnected)return;
       summarySceneRevealed=true;if(summarySceneObserver){summarySceneObserver.disconnect();summarySceneObserver=null}
       for(const animation of summarySceneReplays.get(button)||[])animation.cancel();
       const kind=button.dataset.scene,target=button.querySelector('.scene-motion'),animations=[];
@@ -190,7 +191,7 @@
       panel.append(summary,timeline);
       scheduleSummaryMeasure();
       if(sceneButton&&!summarySceneRevealed)revealSummaryScene(sceneButton);
-      if(!reducedMotion.matches){panel.getAnimations().forEach(animation=>animation.cancel());panel.animate([{opacity:0,transform:'translateY(7px) scale(.985)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:260,easing:'cubic-bezier(.2,.85,.3,1.15)'})}
+      if(!motionPaused()){panel.getAnimations().forEach(animation=>animation.cancel());panel.animate([{opacity:0,transform:'translateY(7px) scale(.985)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:260,easing:'cubic-bezier(.2,.85,.3,1.15)'})}
     }
     function checkKey(item){return hash(item)}
     function renderChecks(){
