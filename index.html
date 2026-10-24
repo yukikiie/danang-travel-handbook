@@ -127,6 +127,7 @@ body{isolation:isolate;background:#fbf7eb}.paper-backdrop{position:fixed;inset:0
 @media print{.paper-backdrop{display:none!important}.paper-cloud,.paper-waves{display:none!important}}
 
 .cover-motion-bar{display:flex;justify-content:flex-end;padding:5px 12px 0;font-size:12px;color:var(--muted)}.cover-motion-bar label{display:flex;align-items:center;gap:6px;min-height:32px;cursor:pointer}.cover-motion-bar input{accent-color:#327d78;width:16px;height:16px}.motion-paused .paper-cloud,.motion-paused .paper-waves,.motion-paused .paper-backdrop *{animation-play-state:paused!important}@keyframes paper-cloud-drift{from{translate:-18px 0}to{translate:25px 3px}}@keyframes paper-hero-tide{from{translate:-16px 3px;rotate:-1deg}to{translate:16px -3px;rotate:1deg}}
+#checklist .entry-reminder-details{padding:0 0 12px 35px;font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}#checklist .entry-reminder-details p{margin:0 0 7px}#checklist .entry-reminder-links{display:flex;flex-wrap:wrap;gap:0 16px}#checklist .entry-reminder-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);text-underline-offset:4px}#checklist .entry-reminder-links .external-link-icon{width:14px;height:14px;margin-left:5px;flex-shrink:0}
 </style><style id="appearance-overrides"></style>
 
 
@@ -368,7 +369,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <details class="nearby-weather" open><summary><span id="weather-nearby-heading">直近の予報を見る</span><span aria-hidden="true">＋</span></summary><div id="weather-nearby" class="weather-nearby"></div></details>
       <div class="weather-footnote"><p id="weather-updated">データを確認中</p><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo ↗</a></div>
     </div></section>
-    <section class="section" id="prepare" aria-labelledby="prepare-title"><div class="section-head"><h2 id="prepare-title"><span class="section-icon" style="background:var(--green)" aria-hidden="true"><svg class="doodle-icon" aria-hidden="true"><use href="#doodle-list"></use></svg></span>持ち物</h2><span class="section-kicker">準備を整えて、安心の旅へ</span></div><div class="prepare-grid"><div class="paper-card"><h3>出発前のチェックリスト</h3><p class="check-progress" id="check-progress" aria-live="polite">0 / 9 項目の準備が完了</p><ul class="checklist" id="checklist"></ul><div class="check-bottom"><small>チェックはこのブラウザーに保存されます。<br>それぞれの端末で準備を確認できます。</small><button type="button" class="text-button" id="reset-checks" disabled="">チェックをクリア</button></div></div><div class="paper-card reminder-card"><span class="section-icon" style="background:var(--yellow)" aria-hidden="true">☂</span><h3>休憩を大切に、無理なく</h3><p>散歩は15〜20分ずつを目安に、途中で座って休みます。雨や疲れがある日は、カフェやチャム彫刻博物館へ変更しても。</p><p>バーナーヒルズは11月7日、ホイアンは11月8日に。どちらも往復送迎を中心に、食事と長めの休憩をはさむ一日です。山上の天気や当日の疲れ具合に合わせて、散策は短めに。</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=Da+Nang+Museum+of+Cham+Sculpture" target="_blank" rel="noopener noreferrer">チャム彫刻博物館の地図 ↗</a> · <a href="https://sunworld.vn/en/banahills" target="_blank" rel="noopener noreferrer">バーナーヒルズ公式 ↗</a></p></div></div></section>
+    <section class="section" id="prepare" aria-labelledby="prepare-title"><div class="section-head"><h2 id="prepare-title"><span class="section-icon" style="background:var(--green)" aria-hidden="true"><svg class="doodle-icon" aria-hidden="true"><use href="#doodle-list"></use></svg></span>持ち物</h2><span class="section-kicker">準備を整えて、安心の旅へ</span></div><div class="prepare-grid"><div class="paper-card"><h3>出発前のチェックリスト</h3><p class="check-progress" id="check-progress" aria-live="polite">0 / 10 項目の準備が完了</p><ul class="checklist" id="checklist"></ul><div class="check-bottom"><small>チェックはこのブラウザーに保存されます。<br>それぞれの端末で準備を確認できます。</small><button type="button" class="text-button" id="reset-checks" disabled="">チェックをクリア</button></div></div><div class="paper-card reminder-card"><span class="section-icon" style="background:var(--yellow)" aria-hidden="true">☂</span><h3>休憩を大切に、無理なく</h3><p>散歩は15〜20分ずつを目安に、途中で座って休みます。雨や疲れがある日は、カフェやチャム彫刻博物館へ変更しても。</p><p>バーナーヒルズは11月7日、ホイアンは11月8日に。どちらも往復送迎を中心に、食事と長めの休憩をはさむ一日です。山上の天気や当日の疲れ具合に合わせて、散策は短めに。</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=Da+Nang+Museum+of+Cham+Sculpture" target="_blank" rel="noopener noreferrer">チャム彫刻博物館の地図 ↗</a> · <a href="https://sunworld.vn/en/banahills" target="_blank" rel="noopener noreferrer">バーナーヒルズ公式 ↗</a></p></div></div></section>
   </main>
   <footer class="wrap footer"><span>2026 ダナンの旅 · 11月6〜9日</span><a href="https://vietnam.travel/jp" target="_blank" rel="noopener noreferrer">ベトナム観光局<svg class="external-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M4 4H12V12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a><button class="button edit-nav" id="edit-trip" type="button"><svg class="button-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#doodle-list"></use></svg>内容を編集</button><button class="button primary" type="button" id="download-html">↓ しおりを保存</button></footer>
   <dialog id="trip-editor" aria-labelledby="editor-title"><form id="editor-form"><div class="dialog-head"><div><h2 id="editor-title">旅のしおりを編集</h2><p>変更はこの端末に保存されます。更新したHTMLをダウンロードすると、しおりを保存できます。サイトを更新すると旅の仲間にも新版が表示されます。</p></div><button class="close-button" type="button" id="close-editor" aria-label="編集を閉じる">×</button></div><div class="editor-body"><p class="editor-error hidden" id="editor-error" role="alert"></p><div class="editor-tabs" role="tablist" aria-label="編集モード">
@@ -597,7 +598,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   "note": "11月6〜9日 · 香港 ⇄ ダナン · 3泊4日",
   "sample": false,
   "dataRevisions": [
-    "sala-2026-10-24-v1"
+    "sala-2026-10-24-v1",
+    "entry-declaration-2026-10-24-v1"
   ],
   "flights": [
     {
@@ -833,6 +835,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   ],
   "checklist": [
     "パスポート・有効な旅行書類・必要な入国書類を公式情報で確認",
+    "ベトナム入国前申告（推奨）：到着72時間前以降に申告し、各自のQRコードを保存・印刷",
     "HX548／HX549の時刻・ターミナル・搭乗手続きを確認",
     "航空券・旅行保険・予約情報をオフラインでも見られるよう保存",
     "折りたたみ傘か雨具・防水袋・滑りにくい歩き慣れた靴",
@@ -878,6 +881,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         });
       }
       trip.dataRevisions=[...revisions,hotelRevision];storageWrite(key,trip);
+    }
+    const isEntryReminder=item=>/入国前申告|事前入国申告|pre[- ]?arrival/i.test(item);
+    const entryRevision='entry-declaration-2026-10-24-v1',entryRevisions=Array.isArray(trip.dataRevisions)?trip.dataRevisions:[];
+    if(!entryRevisions.includes(entryRevision)){
+      const reminder=base.checklist.find(isEntryReminder);
+      if(reminder&&!trip.checklist.some(isEntryReminder))trip.checklist.splice(Math.min(1,trip.checklist.length),0,reminder);
+      trip.dataRevisions=[...entryRevisions,entryRevision];storageWrite(key,trip);
     }
     try{const saved=JSON.parse(storageRead(key+':checks')||storageRead(legacyKey+':checks'));if(saved&&typeof saved==='object'&&!Array.isArray(saved))checks=saved}catch{}
     const fmt=(d,options)=>new Intl.DateTimeFormat('ja-JP',options).format(d);
@@ -1048,6 +1058,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         input.type='checkbox';input.checked=checks[checkKey(item)]===true;
         input.onchange=()=>{checks[checkKey(item)]=input.checked;storageWrite(key+':checks',checks);updateCheckProgress()};
         label.append(input,text('span',item));li.append(label);
+        if(isEntryReminder(item)){
+          const details=text('div','','entry-reminder-details');
+          details.append(text('p','申告の目安：'+fmt(dateAt(trip.start,-3),{month:'long',day:'numeric'})+'〜'+fmt(dateAt(trip.start),{month:'long',day:'numeric'})+'（到着72時間前以降）。'),text('p','旅券、往路の便名・到着日時、ホテルの住所を準備。ビザの要否は使用する旅券ごとに別途確認してください。'));
+          const links=text('div','','entry-reminder-links');
+          links.append(link('公式の入国前申告フォーム ↗','https://prearrival.immigration.gov.vn/'),link('公式案内 ↗','https://hanoi.mfa.gov.sg/mission-updates/pre-arrival-declaration-for-foreign-travellers-entering-vietnam/'));
+          details.append(links);li.append(details);
+        }
         $('checklist').append(li);
       });
       if(!trip.checklist.length)$('checklist').append(text('li','持ち物はまだ登録されていません。「内容を編集」から追加できます。','check-progress'));

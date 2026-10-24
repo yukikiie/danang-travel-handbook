@@ -19,4 +19,5 @@ if(new Set(ids).size!==ids.length)throw new Error('Duplicate IDs');
 for(const day of trip.days)for(const stop of day.stops)if(!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(stop.time))throw new Error('Invalid time');
 if(/\/\* (?:FONT_FACE|SITE_STYLE|WEATHER_STYLE|COVER_IMAGE|BANA_ART|COVER_MOTION|APP_CODE|WEATHER_CODE|TRIP_DATA) \*\//.test(html))throw new Error('Unresolved build marker');
 if(!trip.days[1].title.includes('バーナーヒルズ')||!trip.days[2].title.includes('ホイアン'))throw new Error('Missing requested destinations');
+if(trip.checklist.filter(item=>item.includes('入国前申告')).length!==1||!html.includes('https://prearrival.immigration.gov.vn/'))throw new Error('Missing entry declaration reminder');
 console.log(JSON.stringify({scripts,days:trip.days.length,stops:trip.days.map(d=>d.stops.length),checklist:trip.checklist.length,hotels:trip.stays.length,restoredLayout:true,weather:true,bytes:Buffer.byteLength(html)}));

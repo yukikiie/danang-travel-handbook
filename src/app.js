@@ -24,6 +24,13 @@
       }
       trip.dataRevisions=[...revisions,hotelRevision];storageWrite(key,trip);
     }
+    const isEntryReminder=item=>/入国前申告|事前入国申告|pre[- ]?arrival/i.test(item);
+    const entryRevision='entry-declaration-2026-10-24-v1',entryRevisions=Array.isArray(trip.dataRevisions)?trip.dataRevisions:[];
+    if(!entryRevisions.includes(entryRevision)){
+      const reminder=base.checklist.find(isEntryReminder);
+      if(reminder&&!trip.checklist.some(isEntryReminder))trip.checklist.splice(Math.min(1,trip.checklist.length),0,reminder);
+      trip.dataRevisions=[...entryRevisions,entryRevision];storageWrite(key,trip);
+    }
     try{const saved=JSON.parse(storageRead(key+':checks')||storageRead(legacyKey+':checks'));if(saved&&typeof saved==='object'&&!Array.isArray(saved))checks=saved}catch{}
     const fmt=(d,options)=>new Intl.DateTimeFormat('ja-JP',options).format(d);
     const text=(tag,value,cls)=>{const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;return n};
@@ -193,6 +200,13 @@
         input.type='checkbox';input.checked=checks[checkKey(item)]===true;
         input.onchange=()=>{checks[checkKey(item)]=input.checked;storageWrite(key+':checks',checks);updateCheckProgress()};
         label.append(input,text('span',item));li.append(label);
+        if(isEntryReminder(item)){
+          const details=text('div','','entry-reminder-details');
+          details.append(text('p','申告の目安：'+fmt(dateAt(trip.start,-3),{month:'long',day:'numeric'})+'〜'+fmt(dateAt(trip.start),{month:'long',day:'numeric'})+'（到着72時間前以降）。'),text('p','旅券、往路の便名・到着日時、ホテルの住所を準備。ビザの要否は使用する旅券ごとに別途確認してください。'));
+          const links=text('div','','entry-reminder-links');
+          links.append(link('公式の入国前申告フォーム ↗','https://prearrival.immigration.gov.vn/'),link('公式案内 ↗','https://hanoi.mfa.gov.sg/mission-updates/pre-arrival-declaration-for-foreign-travellers-entering-vietnam/'));
+          details.append(links);li.append(details);
+        }
         $('checklist').append(li);
       });
       if(!trip.checklist.length)$('checklist').append(text('li','持ち物はまだ登録されていません。「内容を編集」から追加できます。','check-progress'));
